@@ -56,7 +56,11 @@
     h1{font-size:clamp(28px,5vw,48px);line-height:1.05;margin:0 0 10px}
     .subtitle{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin-bottom:24px}
     .bullets{display:grid;gap:14px;margin:18px 0 28px}
-    .bullet{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.08);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+    .bullet{
+      display:flex;gap:12px;align-items:flex-start;
+      background:rgba(255,255,255,.08);padding:12px 14px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.12)
+    }
     .bullet svg{flex:0 0 22px}
     .hero-card{
       background:rgba(14,58,102,.55);
@@ -86,14 +90,29 @@
     .btn.secondary{background:rgba(255,255,255,.12);color:#fff;font-weight:600}
     .note{font-size:13px;color:var(--muted)}
 
-    /* Features band */
+    /* Features band (Beneficios) */
     .band{padding:28px 0 46px}
-    .grid-3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;display:grid;gap:8px}
+    .grid-3{
+      display:grid;
+      gap:16px;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch; /* alturas consistentes */
+    }
+    .card{
+      display:flex;            /* control vertical consistente */
+      flex-direction:column;
+      justify-content:flex-start;
+      gap:8px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      padding:18px;
+      min-height: 120px;       /* opcional: asegura presencia visual pareja */
+    }
     .card h4{margin:0 0 6px}
-    .card p{margin:0;color:var(--muted)}
+    .card p{margin:0;color:var(--muted);line-height:1.45}
 
-    /* Contact */
+    /* Contacto */
     .contact{padding:44px 0 70px;display:grid;gap:18px}
     .contact .links{display:flex;flex-wrap:wrap;gap:12px}
     .chip{background:rgba(255,255,255,.12);padding:10px 14px;border-radius:10px}
@@ -101,10 +120,26 @@
     /* Footer */
     footer{border-top:1px solid rgba(255,255,255,.12);padding:18px 0 30px;color:var(--muted);font-size:14px}
 
-    /* Responsive */
+    /* Tipografía: evitar cortes raros */
+    @supports (text-wrap: balance){
+      .card h4 { text-wrap: balance; }
+    }
+    .card p{ overflow-wrap:anywhere; word-break:normal; }
+
+    /* Breakpoints */
+    /* Tablets: 2 columnas */
+    @media (max-width: 1100px){
+      .grid-3{ grid-template-columns: repeat(2, 1fr); }
+    }
+    /* Móviles: 1 columna + respiración extra y header más compacto */
     @media (max-width: 900px){
       .hero-grid{grid-template-columns:1fr}
       .brand img{width:128px}
+      header .nav{ padding: 10px 0; }
+      main.wrap{ padding-top: 8px; }   /* evita solape bajo header sticky */
+      .grid-3{ grid-template-columns: 1fr; }
+      .band{ padding: 24px 0 40px; }
+      .card{ padding: 16px; }
     }
   </style>
 </head>
@@ -112,7 +147,7 @@
   <header>
     <div class="wrap nav">
       <div class="brand">
-        <!-- Logo nuevo -->
+        <!-- Reemplaza por tu archivo local del logo -->
         <img src="Logo Minimalista 1.png" alt="VitalLink — Tecnología que cuida">
       </div>
       <a class="cta" href="https://wa.me/59896488944" target="_blank" rel="noopener">Hablar por WhatsApp</a>
@@ -151,7 +186,7 @@
 
         <div class="hero-card">
           <div class="media">
-            <!-- Reemplaza por tu foto final del producto -->
+            <!-- Reemplaza por foto final del producto -->
             <img src="Flyer 7.png" alt="Pulsera de alerta VitalLink">
           </div>
           <div class="product">
